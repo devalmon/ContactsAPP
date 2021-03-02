@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A3BD7D125EEEE5A00400C91 /* ContactCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3BD7D025EEEE5A00400C91 /* ContactCell.swift */; };
 		8AD72F0525ED0D050025BACE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD72F0425ED0D050025BACE /* AppDelegate.swift */; };
 		8AD72F0725ED0D050025BACE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD72F0625ED0D050025BACE /* SceneDelegate.swift */; };
 		8AD72F0C25ED0D060025BACE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8AD72F0A25ED0D060025BACE /* Main.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8A3BD7D025EEEE5A00400C91 /* ContactCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCell.swift; sourceTree = "<group>"; };
 		8AD72F0125ED0D050025BACE /* ContactsAPP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContactsAPP.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8AD72F0425ED0D050025BACE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8AD72F0625ED0D050025BACE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A3BD7D525EEEE6100400C91 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8A3BD7D025EEEE5A00400C91 /* ContactCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		8AD72EF825ED0D050025BACE = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +115,7 @@
 			children = (
 				8AD72F0425ED0D050025BACE /* AppDelegate.swift */,
 				8AD72F0625ED0D050025BACE /* SceneDelegate.swift */,
+				8A3BD7D525EEEE6100400C91 /* Cells */,
 				8AD72F3725ED0E6B0025BACE /* Controllers */,
 				8AD72F0A25ED0D060025BACE /* Main.storyboard */,
 				8AD72F0D25ED0D070025BACE /* Assets.xcassets */,
@@ -272,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A3BD7D125EEEE5A00400C91 /* ContactCell.swift in Sources */,
 				8AD72F0525ED0D050025BACE /* AppDelegate.swift in Sources */,
 				8AD72F4625ED0EDA0025BACE /* FrequentContactsViewController.swift in Sources */,
 				8AD72F4125ED0EC30025BACE /* ContactsViewController.swift in Sources */,
