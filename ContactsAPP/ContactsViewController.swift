@@ -76,6 +76,15 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
         return UIView()
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //todo animate cell
+        cell.alpha = 0
+        
+        UIView.animate(withDuration: 0.5, delay: 0.05 * Double(indexPath.row)) {
+            cell.alpha = 1
+        }
+    }
+    
     
 }
 
