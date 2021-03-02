@@ -92,9 +92,11 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //todo animate cell
         cell.alpha = 0
-        
+        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+        cell.layer.transform = transform
         UIView.animate(withDuration: 0.5, delay: 0.05 * Double(indexPath.row)) {
             cell.alpha = 1
+            cell.layer.transform = CATransform3DIdentity
         }
     }
     
