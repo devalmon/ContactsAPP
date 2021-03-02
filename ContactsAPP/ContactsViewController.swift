@@ -8,34 +8,30 @@
 import UIKit
 
 class ContactsViewController: UIViewController {
-
-    var searchBar = UISearchBar()
+    var searchController = UISearchController()
     var tableView = UITableView()
     var contacts = ["Анна","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана"]
+    var filteredContacts = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureVC()
-        configureTextField()
+        configureSearchController()
         configureTableView()
     }
     
     //MARK: - config
     private func configureVC() {
         view.backgroundColor = UIColor.white
+        filteredContacts = contacts
     }
     
-    private func configureTextField() {
-        //Layout
-        searchBar.placeholder = "search"
-        view.addSubview(searchBar)
-        searchBar.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            searchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 7),
-            searchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            searchBar.heightAnchor.constraint(equalToConstant: 40)
-        ])
+    private func configureSearchController() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.sizeToFit()
+        tableView.tableHeaderView = searchController.searchBar
+        definesPresentationContext = true
     }
     
     private func configureTableView() {
@@ -49,7 +45,7 @@ class ContactsViewController: UIViewController {
         
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
@@ -64,12 +60,20 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        cell.textLabel?.text = contacts[indexPath.row]
+        cell.textLabel?.text = filteredContacts[indexPath.row]
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return UIView()
+    }
+    
+    
+}
+
+extension ContactsViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        //TODO
     }
     
     
