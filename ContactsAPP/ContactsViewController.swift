@@ -40,6 +40,7 @@ class ContactsViewController: UIViewController {
                 self.contacts.append(name)
             })
         }
+        contacts.sort()
         
         filteredContacts = contacts
 //        title = "Search"
