@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Contacts
 
 class ContactsViewController: UIViewController {
     var searchController = UISearchController()
     var tableView = UITableView()
-    var contacts = ["Анна","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана","Анна","Маша","Михаил","Григорий","Оксана","Max","Den","Anna","John"]
+    var contacts = [String]()
     var filteredContacts = [String]()
     
     override func viewDidLoad() {
@@ -28,6 +29,18 @@ class ContactsViewController: UIViewController {
     //MARK: - config
     private func configureVC() {
         view.backgroundColor = UIColor.white
+        
+        let contactStore = CNContactStore()
+        let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
+        let request = CNContactFetchRequest(keysToFetch: keys)
+        
+        do {
+            try? contactStore.enumerateContacts(with: request, usingBlock: { (contact, stop) in
+                let name = "\(contact.givenName) \(contact.familyName)"
+                self.contacts.append(name)
+            })
+        }
+        
         filteredContacts = contacts
 //        title = "Search"
 //        navigationController?.navigationBar.prefersLargeTitles = true
