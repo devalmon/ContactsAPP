@@ -55,7 +55,7 @@ class ContactsViewController: UIViewController {
 
 extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return contacts.count
+        return filteredContacts.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -73,7 +73,15 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ContactsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
-        //TODO
+        if let searchResult = searchController.searchBar.text {
+            filteredContacts = searchResult.isEmpty ? contacts : contacts.filter({ (str) -> Bool in
+                return str.rangeOfCharacter(from: CharacterSet(charactersIn: searchResult), options: .caseInsensitive, range: nil) != nil
+            })
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
     }
     
     
