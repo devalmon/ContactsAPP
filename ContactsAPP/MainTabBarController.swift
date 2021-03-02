@@ -9,7 +9,7 @@ import UIKit
 
 class MainTabBarController: UITabBarController {
     
-    let contactsVC = ContactsViewController()
+    let contactsVC = UINavigationController(rootViewController: ContactsViewController())
     let frequentContactsVC = FrequentContactsViewController()
 
     override func viewDidLoad() {

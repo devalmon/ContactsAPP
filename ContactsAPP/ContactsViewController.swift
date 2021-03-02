@@ -20,16 +20,24 @@ class ContactsViewController: UIViewController {
         configureTableView()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     //MARK: - config
     private func configureVC() {
         view.backgroundColor = UIColor.white
         filteredContacts = contacts
+//        title = "Search"
+//        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     private func configureSearchController() {
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.searchBar.sizeToFit()
+        searchController.searchBar.placeholder = "search a person"
         tableView.tableHeaderView = searchController.searchBar
         definesPresentationContext = true
     }
@@ -77,10 +85,7 @@ extension ContactsViewController: UISearchResultsUpdating {
             filteredContacts = searchResult.isEmpty ? contacts : contacts.filter({ (str) -> Bool in
                 return str.rangeOfCharacter(from: CharacterSet(charactersIn: searchResult), options: .caseInsensitive, range: nil) != nil
             })
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
+            self.tableView.reloadData()
         }
     }
     
