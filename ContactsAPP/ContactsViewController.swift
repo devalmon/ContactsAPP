@@ -12,6 +12,7 @@ class ContactsViewController: UIViewController {
     var searchController = UISearchController()
     var tableView = UITableView()
     var contacts = [String]()
+    var contactImages = [UIImageView?]()
     var filteredContacts = [String]()
     
     override func viewDidLoad() {
@@ -31,13 +32,21 @@ class ContactsViewController: UIViewController {
         view.backgroundColor = UIColor.white
         
         let contactStore = CNContactStore()
-        let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
-        let request = CNContactFetchRequest(keysToFetch: keys)
+        //let keys = [CNContactFormatter.descriptorForRequiredKeys(for: .fullName)]
+        let keys =  [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactEmailAddressesKey, CNContactImageDataKey]
+        let request = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
         
         do {
             try? contactStore.enumerateContacts(with: request, usingBlock: { (contact, stop) in
                 let name = "\(contact.givenName) \(contact.familyName)"
                 self.contacts.append(name)
+                
+                if let image = contact.imageData {
+//                    self.contactImages.append(UIImageView(image: UIImage(data: image)))
+                    self.contactImages.append(UIImageView(image: UIImage(data: image)))
+                }
+                
+                
             })
         }
         contacts.sort()
@@ -85,6 +94,7 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
 //        cell.name.text = filteredContacts[indexPath.row]
         cell.name.text = filteredContacts[indexPath.row]
         cell.phone.text = "+7(800)700-5555"
+//        cell.imageContact = contactImages[indexPath.row]
         return cell
     }
     
@@ -117,7 +127,7 @@ extension ContactsViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         if let searchResult = searchController.searchBar.text {
             filteredContacts = searchResult.isEmpty ? contacts : contacts.filter({ (str) -> Bool in
-                return str.rangeOfCharacter(from: CharacterSet(charactersIn: searchResult), options: .caseInsensitive, range: nil) != nil
+                return str.lowercased().contains(searchResult.lowercased())
             })
             self.tableView.reloadData()
         }

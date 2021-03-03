@@ -10,9 +10,9 @@ import UIKit
 class ContactCell: UITableViewCell {
     static let identifier = "ContactCell"
     
-    var imageContact: UIView = {
-        let image = UIView()
-        image.backgroundColor = UIColor.systemPink
+    var imageContact: UIImageView = {
+        let image = UIImageView()
+        image.backgroundColor = UIColor.systemTeal
         image.clipsToBounds = true
         return image
     }()
