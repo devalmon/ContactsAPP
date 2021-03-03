@@ -57,7 +57,7 @@ class ContactsViewController: UIViewController {
     }
     
     private func configureTableView() {
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(ContactCell.self, forCellReuseIdentifier: ContactCell.identifier)
         tableView.delegate = self
         tableView.dataSource = self
         
@@ -81,9 +81,10 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "cell")
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = filteredContacts[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: ContactCell.identifier, for: indexPath) as! ContactCell
+//        cell.name.text = filteredContacts[indexPath.row]
+        cell.name.text = filteredContacts[indexPath.row]
+        cell.phone.text = "+7(800)700-5555"
         return cell
     }
     
@@ -104,6 +105,10 @@ extension ContactsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
 }

@@ -8,16 +8,66 @@
 import UIKit
 
 class ContactCell: UITableViewCell {
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    static let identifier = "ContactCell"
+    
+    var imageContact: UIView = {
+        let image = UIView()
+        image.backgroundColor = UIColor.systemPink
+        image.clipsToBounds = true
+        return image
+    }()
+    var name: UILabel = {
+        let name = UILabel()
+        name.font = UIFont.boldSystemFont(ofSize: 25)
+        return name
+    }()
+    var phone: UILabel = {
+        let phone = UILabel()
+        return phone
+    }()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.backgroundColor = UIColor.white
+        contentView.addSubview(imageContact)
+        contentView.addSubview(name)
+        contentView.addSubview(phone)
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
-
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        layoutImageContact()
+        layoutTextInfo()
+    }
+    
+    //MARK: - config
+    private func layoutImageContact() {
+        imageContact.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            imageContact.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            imageContact.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            imageContact.widthAnchor.constraint(equalToConstant: 70),
+            imageContact.heightAnchor.constraint(equalToConstant: 70),
+        ])
+        
+        imageContact.layer.cornerRadius = imageContact.frame.height / 2
+    }
+    private func layoutTextInfo() {
+        name.translatesAutoresizingMaskIntoConstraints = false
+        phone.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            name.leadingAnchor.constraint(equalTo: imageContact.trailingAnchor, constant: 10),
+            name.topAnchor.constraint(equalTo: imageContact.topAnchor, constant: 5),
+            name.heightAnchor.constraint(equalToConstant: 26),
+            phone.leadingAnchor.constraint(equalTo: imageContact.trailingAnchor, constant: 10),
+            phone.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 5),
+            phone.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+        ])
+    }
 }
