@@ -19,7 +19,7 @@ class MainTabBarController: UITabBarController {
     //MARK: - setupTabBarTitles
     private func configureMainTabBarVC() {
         viewControllers = [contactsVC, frequentContactsVC]
-        selectedIndex = 0
+        selectedIndex = 1
         contactsVC.tabBarItem.title = "Search"
         frequentContactsVC.tabBarItem.title = "Most Viewed"
         contactsVC.tabBarItem.image = UIImage(systemName: "magnifyingglass.circle")
